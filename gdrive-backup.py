@@ -40,7 +40,7 @@ except ImportError:
 SCOPES = 'https://www.googleapis.com/auth/drive.readonly'
 
 # Root destination folder (MUST EXIST)
-dest_root = '/Users/chris/backup/gdrive';
+dest_root = 'E:/projects/gdrive/backup';
 
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Drive API Quickstart'
@@ -161,6 +161,8 @@ def main():
         timestamp = fh.readline();
         print("Last run: " + timestamp);
         fh.close()
+    else:
+        timestamp='2001-01-01'
     
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
@@ -169,7 +171,8 @@ def main():
 
     items = get_children('root')
     get_files_or_folders(items,0,dest)
-
+        
+        
     fh = open(dest + '/backup-timestamp','w')
     fh.write(datetime.utcnow().isoformat())
     fh.close()
